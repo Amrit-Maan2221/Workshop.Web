@@ -19,6 +19,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import { Input } from "@/components/ui/input"
 import { Link } from "react-router-dom"
 import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu"
+import { useAuth } from "@/hooks/useAuth"
 
 const menuData = [
     {
@@ -127,7 +128,8 @@ const menuData = [
     }
 ];
 export default function AppSidebar() {
-    const [searchTerm, setSearchTerm] = useState("")
+    const { account, logout } = useAuth();
+    const [searchTerm, setSearchTerm] = useState("");
 
     // 1. Highlighting Helper (Remains same)
     const HighlightText = ({ text, highlight }) => {
@@ -293,19 +295,19 @@ export default function AppSidebar() {
                             <DropdownMenuTrigger asChild>
                                 <SidebarMenuButton size="lg">
                                     <Avatar className="h-8 w-8 rounded-lg bg-gray-200 flex items-center justify-center">
-                                        CN
+                                        {getInitials(account.name)}
                                     </Avatar>
 
                                     <div className="grid flex-1 text-left text-sm leading-tight">
-                                        <span className="truncate font-semibold">shadcn</span>
-                                        <span className="truncate text-xs">m@example.com</span>
+                                        <span className="truncate font-semibold">{account.name}</span>
+                                        <span className="truncate text-xs">{account.username}</span>
                                     </div>
                                     <ChevronsUpDown className="ml-auto size-4" />
                                 </SidebarMenuButton>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent className="w-[--radix-dropdown-menu-trigger-width] min-w-56" side="top" align="end">
                                 <DropdownMenuItem>Account</DropdownMenuItem>
-                                <DropdownMenuItem>Sign out</DropdownMenuItem>
+                                <DropdownMenuItem onClick={logout}>Sign out</DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </SidebarMenuItem>
@@ -313,4 +315,12 @@ export default function AppSidebar() {
             </SidebarFooter>
         </Sidebar>
     )
+}
+
+function getInitials(name) {
+  if (!name) return "?";
+  const parts = name.split(" ");
+  return parts.length >= 2
+    ? parts[0][0] + parts[1][0]
+    : parts[0][0];
 }

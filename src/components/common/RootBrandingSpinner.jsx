@@ -2,18 +2,18 @@ import { Settings, Loader2 } from "lucide-react";
 
 export default function RootBrandingSpinner() {
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-center bg-background text-foreground">
+    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-background text-foreground">
       <div className="relative flex flex-col items-center gap-6">
         
-        {/* Workshop Icon with Mechanical Animation */}
+        {/* Workshop Icon */}
         <div className="relative flex items-center justify-center">
           <Settings className="h-12 w-12 text-primary animate-[spin_4s_linear_infinite]" />
           <div className="absolute inset-0 flex items-center justify-center">
-             <div className="h-4 w-4 rounded-full bg-background border-2 border-primary" />
+            <div className="h-4 w-4 rounded-full bg-background border-2 border-primary" />
           </div>
         </div>
 
-        {/* Branding Text */}
+        {/* Branding */}
         <div className="text-center space-y-1">
           <h1 className="text-3xl font-black tracking-tight uppercase italic">
             Workshop<span className="text-primary">Pro</span>
@@ -32,10 +32,9 @@ export default function RootBrandingSpinner() {
             </span>
           </div>
         </div>
-
       </div>
-      
-      {/* Bottom version info - Standard for Industrial Apps */}
+
+      {/* Version */}
       <div className="absolute bottom-8 text-[10px] text-muted-foreground/50 font-mono">
         v1.0.4-stable
       </div>
