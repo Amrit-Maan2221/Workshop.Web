@@ -29,12 +29,10 @@ export default function MainLayout() {
             />
 
             <div className="flex flex-1 overflow-hidden relative">
-              <main className="flex-1 overflow-y-auto p-2 md:p-4">
-                <div className="h-full">
-                  <Suspense fallback={<ContentGridSkeleton />}>
-                    <Outlet />
-                  </Suspense>
-                </div>
+              <main className="flex-1 min-w-0 flex flex-col overflow-hidden px-4 pt-4"> 
+                <Suspense fallback={<ContentGridSkeleton />}>
+                  <Outlet />
+                </Suspense>
               </main>
 
               {/* DESKTOP VIEW (Side-by-side) */}
